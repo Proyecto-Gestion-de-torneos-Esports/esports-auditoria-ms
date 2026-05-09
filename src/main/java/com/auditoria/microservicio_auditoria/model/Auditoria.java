@@ -1,5 +1,6 @@
 package com.auditoria.microservicio_auditoria.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -9,23 +10,22 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "auditoria")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Auditoria {
 
-    @NotNull(message = "El id de la auditoria no puede ser nulo")
-    @Positive(message = "El id de la auditoria tiene que ser mayor a 0")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, length = 5)
     private Long idAuditoria;
 
-    @NotNull(message = "El id del usuario no puede ser nulo")
-    @Positive(message = "El id del usuario tiene que ser mayor a 0")
-    private Long idUsuario;
-
-    @NotBlank(message = "El detalle no puede ser vacio ni nulo")
+    @Column(nullable = false)
     private String detalle;
 
-    @NotNull(message = "La fecha no puede ser nula")
+    @Column(nullable = false)
     private LocalDate fecha;
 
 
