@@ -5,7 +5,6 @@ import com.auditoria.microservicio_auditoria.dto.AuditoriaResponseDTO;
 import com.auditoria.microservicio_auditoria.model.Auditoria;
 import com.auditoria.microservicio_auditoria.repository.AuditoriaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
