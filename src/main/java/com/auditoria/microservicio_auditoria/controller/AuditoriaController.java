@@ -5,6 +5,8 @@ import com.auditoria.microservicio_auditoria.dto.AuditoriaRequestDTO;
 import com.auditoria.microservicio_auditoria.dto.AuditoriaResponseDTO;
 import com.auditoria.microservicio_auditoria.service.AuditoriaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,18 +20,18 @@ public class AuditoriaController {
     private final AuditoriaService auditoriaService;
 
     @GetMapping
-    public List<AuditoriaResponseDTO> obtenerTodos(){
-        return auditoriaService.obtenerTodos();
+    public ResponseEntity<List<AuditoriaResponseDTO>> obtenerTodos(){
+        return ResponseEntity.ok((auditoriaService.obtenerTodos()));
     }
 
     @GetMapping("/{id}")
-    public Optional<AuditoriaResponseDTO> buscarPorId(@PathVariable Long id){
-        return auditoriaService.buscarPorId(id);
+    public ResponseEntity<Optional<AuditoriaResponseDTO>> buscarPorId(@PathVariable Long id){
+        return ResponseEntity.ok(auditoriaService.buscarPorId(id));
     }
 
     @PostMapping
-    public AuditoriaResponseDTO generarAuditoria(@RequestBody AuditoriaRequestDTO auditoria){
-        return auditoriaService.generarAuditoria(auditoria);
+    public ResponseEntity<AuditoriaResponseDTO> generarAuditoria(@RequestBody AuditoriaRequestDTO auditoria){
+        return ResponseEntity.status(HttpStatus.CREATED).body(auditoriaService.generarAuditoria(auditoria));
     }
 
 }
