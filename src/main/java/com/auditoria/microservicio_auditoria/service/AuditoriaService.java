@@ -33,11 +33,11 @@ public class AuditoriaService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<AuditoriaResponseDTO> buscarPorId(Long id){
+    public AuditoriaResponseDTO buscarPorId(Long id){
          Optional<Auditoria> auditoria = auditoriaRepository.findById(id);
 
          if(auditoria.isPresent()){
-             return auditoria.map(this::mapToDTO);
+             return auditoria.map(this::mapToDTO).orElseThrow();
          }
          throw new AuditoriaNotFoundException("Auditoria con id "+id+" no encontrada");
     }

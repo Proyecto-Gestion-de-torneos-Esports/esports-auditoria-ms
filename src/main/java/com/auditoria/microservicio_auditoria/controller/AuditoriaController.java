@@ -25,7 +25,7 @@ public class AuditoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<AuditoriaResponseDTO>> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<AuditoriaResponseDTO> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(auditoriaService.buscarPorId(id));
     }
 
