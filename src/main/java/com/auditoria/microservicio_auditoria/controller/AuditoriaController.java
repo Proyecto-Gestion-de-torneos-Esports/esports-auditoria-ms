@@ -9,9 +9,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +29,7 @@ public class AuditoriaController {
     private final AuditoriaService auditoriaService;
     private final AuditoriaModelAssembler auditoriaAssembler;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @Operation(summary = "Listar auditorias", description = "Listado de auditorias disponibles")
     public ResponseEntity<?> obtenerTodos(){
@@ -40,6 +41,7 @@ public class AuditoriaController {
         return ResponseEntity.status(HttpStatus.OK).body(collectionModel);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     @Operation(summary = "Busqueda de auditoria", description = "Busqueda de auditoria en especifico")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id){
@@ -47,6 +49,7 @@ public class AuditoriaController {
         return ResponseEntity.ok(auditoriaAssembler.toModel(auditoria));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Operation(summary = "Generar auditoria", description = "Registro de auditoria con su evento correspondiente")
     public ResponseEntity<AuditoriaResponseDTO> generarAuditoria(@RequestBody AuditoriaRequestDTO auditoria){
