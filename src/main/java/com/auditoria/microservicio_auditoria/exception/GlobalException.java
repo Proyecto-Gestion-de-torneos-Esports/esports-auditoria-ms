@@ -34,7 +34,8 @@ public class GlobalException {
     public ResponseEntity<?> manejoGeneral(Exception e){
         HashMap<String, Object> error = new HashMap<>();
         error.put("Estado", 500);
-        error.put("Mensaje", "Error interno en el servidor");
+        //error.put("Mensaje", "Error interno en el servidor");
+        error.put("Mensaje", e.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
 

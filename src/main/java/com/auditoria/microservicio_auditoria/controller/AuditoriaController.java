@@ -49,7 +49,6 @@ public class AuditoriaController {
         return ResponseEntity.ok(auditoriaAssembler.toModel(auditoria));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Operation(summary = "Generar auditoria", description = "Registro de auditoria con su evento correspondiente")
     public ResponseEntity<AuditoriaResponseDTO> generarAuditoria(@RequestBody AuditoriaRequestDTO auditoria){
